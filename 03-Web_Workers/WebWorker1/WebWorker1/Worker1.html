@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    
+</head>
+<body>
+    <div>
+        <label for="message">Message:</label>
+        <input type="text" id="message" class="form-control"/>
+        <button type="button" id="send-message" class="btn">Send Message</button>
+    </div>
+    <ul id="message-list"></ul>
+    <script>
+        const worker = new Worker("./Worker1.js");
+        worker.onmessage = function (e) {
+            const message = e.data;
+            $("#message-list").append("<li>" + message + "</li>");
+        };
+
+        $("#send-message").click(function () {
+            const message = $("#message").val();
+            const messageObject = { message: message }; 
+            worker.postMessage(messageObject);
+        });
+
+        worker.postMessage({ status: "START" });
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!-- 
+    Omar Sáenz Mendoza
+    omar.saenz@softtek.com
+    MEAN: Javascript for experienced developers 
+-->
+<html>
+
+<head>
+    <title>Error messages!</title>
+    <script type="text/javascript">
+        function myFunc() {
+            const a = 100;
+            const b = 0;
+            // const b = 10;
+            try {
+                if (b == 0) {
+                    throw ("Divide by zero error.");
+                } else {
+                    const c = a / b;
+                    alert("c = " + c);
+                }
+            } catch (e) {
+                alert("Error: " + e);
+            } finally {
+                alert("Finally!")
+            }
+        }
+
+        window.onerror = function (msg, url, line) {
+            alert("Message: " + msg);
+            alert("url: " + url);
+            alert("Line number: " + line);
+        }
+    </script>
+</head>
+
+<body>
+    <label for="btn">Click the following to see the result</label>
+    <input id="btn" type="button" onclick="myFuncd();" value="Click Me" />
+</body>
+
+</html>
